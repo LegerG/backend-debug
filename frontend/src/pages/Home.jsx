@@ -1,36 +1,30 @@
-import Counter from "../components/Counter";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { authContext } from "../context/AuthenticationContext";
 import logo from "../assets/logo.svg";
 
 export default function Home() {
+  const { tryLogin, token } = useContext(authContext);
+
+  const handleClick = () => {
+    tryLogin();
+  };
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
+      <button type="button" onClick={handleClick}>
+        Get a token
+      </button>
 
-      <Counter />
+      <p>{token}</p>
+      <button
+        type="button"
+        onClick={() => navigator.clipboard.writeText(token)}
+      >
+        Copy to clipboard
+      </button>
 
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
+      <Link to="/users">Go to users list</Link>
     </header>
   );
 }
