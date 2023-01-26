@@ -1,8 +1,8 @@
-const { createContext, useEffect, useState, useMemo } = require("react");
+import { createContext, useEffect, useState, useMemo } from "react";
 
-const authContext = createContext();
+export const authContext = createContext();
 
-function AuthenticationContextProvider({ children }) {
+export function AuthenticationContextProvider({ children }) {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
 
@@ -16,8 +16,8 @@ function AuthenticationContextProvider({ children }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("token", data);
-        setToken(data);
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
       });
   };
 
@@ -52,5 +52,3 @@ function AuthenticationContextProvider({ children }) {
     <authContext.Provider value={contextValue}>{children}</authContext.Provider>
   );
 }
-
-export default { AuthenticationContextProvider, authContext };

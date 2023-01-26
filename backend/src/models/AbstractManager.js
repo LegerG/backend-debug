@@ -3,14 +3,22 @@ class AbstractManager {
     this.table = table;
   }
 
-  find(id) {
-    return this.connection.query(`select * from  ${this.table} where id = ?`, [
-      id,
-    ]);
+  async find(id) {
+    const [rows] = await this.connection.query(
+      `select * from  ${this.table} where id = ?`,
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return null;
+    }
+
+    return rows[0];
   }
 
-  findAll() {
-    return this.connection.query(`select * from  ${this.table}`);
+  async findAll() {
+    const [rows] = await this.connection.query(`select * from  ${this.table}`);
+    return rows;
   }
 
   delete(id) {

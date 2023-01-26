@@ -9,6 +9,7 @@ export default function Home() {
   const handleClick = () => {
     tryLogin();
   };
+
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />

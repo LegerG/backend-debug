@@ -1,5 +1,6 @@
 const { sign } = require("jsonwebtoken");
 const { user: userModel } = require("../models");
+require("dotenv").config();
 
 /**
  * Forge JWT for the user and send it back to the client
@@ -14,7 +15,7 @@ async function getToken(req, res) {
   }
 
   const token = sign(
-    { username: user.username, id: user.id },
+    { firstname: user.firstname, lastname: user.lastname, id: user.id },
     process.env.JWT_SECRET
   );
 

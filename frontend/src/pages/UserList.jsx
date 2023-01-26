@@ -1,4 +1,4 @@
-const { useEffect, useState } = require("react");
+import { useEffect, useState } from "react";
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -21,7 +21,9 @@ function UserList() {
 
       <ul>
         {users.map((user) => (
-          <li>{user.name}</li>
+          <li key={user.id}>
+            {user.firstname} {user.lastname}
+          </li>
         ))}
       </ul>
     </div>
